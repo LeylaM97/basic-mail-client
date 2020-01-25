@@ -25,4 +25,43 @@
     font-family: sans-serif;
     font-size: 16px;
     padding-top: 10px;
+    color:#000;
 }
+.mail-subtitles:hover{
+    background-color: #ffe6ff;
+    cursor: pointer;
+}
+
+.mail-body{
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 30px 10px;
+    border: 1px solid #660066;
+    border-radius: 5px;
+    width: 640px;
+    margin: 50px auto;
+}
+.mail-body__titles{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.mail-body-info{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-template-rows: repeat(3,auto);
+    justify-content: center;
+    grid-column-gap: 10px;
+}
+.mail-body-content{
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: justify;
+}
+.mail-body-header{
+     font-size: 18px;
+     font-weight: bold;
+     padding-bottom: 20px;
+     padding-left: 20px;
+ }

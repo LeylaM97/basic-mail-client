@@ -2,6 +2,9 @@ import React from 'react';
 import './index.css';
 import MailTitles from "../MailTitles";
 import Title from "../Title";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {setDraftAction, setMailsAction, setSentAction} from "../../actions/mailActions";
 
 class Main extends React.Component {
 
@@ -9,31 +12,13 @@ class Main extends React.Component {
         super(props);
         this.state={
             isLoaded: false,
-            inbox: []
+            inbox: [],
+            id:''
         }
     }
 
     componentDidMount() {
-        const  getData = async (options) =>{
-            const url = options.url;
-            const method = options.method;
-            await fetch(url)
-                .then(result => result.json())
-                .then(data => {
-                    const obj = {};
-                    obj[method] = data;
-                    this.setState(Object.assign(
-                        {},
-                        {
-                            ...this.state,
-                            isLoaded: true,
-                        },
-                        obj
-                    ))
-                })
-        };
-
-        getData({url: "https://my-json-server.typicode.com/LeylaM97/json_mails/inbox", method: 'inbox'});
+        this.props.setMails();
     }
 
     render() {
@@ -64,14 +49,15 @@ class Main extends React.Component {
             </div>
 
                 {
-                    this.state.inbox.map((message, key)=>{
+                    this.props.mails.mails.map((message)=>{
                     return(
-                        <MailTitles
-                            key={key}
+                       <Link to={'mail/' + `${message.id}`} key={message.id}>
+                           <MailTitles
                             subject={message.subject}
                             from={message.from}
                             to={message.to}
-                        />
+                            />
+                       </Link>
                     )
                 })}
 
@@ -79,4 +65,19 @@ class Main extends React.Component {
     }
 }
 
-export default Main;
+
+const mapStateToProps=(store)=>{
+    return  {
+        mails:store.mails
+    }
+};
+
+const mapDispatchToProps = dispatch=>{
+    return{
+        setMails: () => dispatch(setMailsAction()),
+        setSent: () => dispatch(setSentAction()),
+        setDraft: () => dispatch(setDraftAction())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -8,3 +8,12 @@
     font-family: sans-serif;
     padding: 10px 20px;
 }
+.sidebar-item:hover{
+    cursor: pointer;
+    color:#fff;
+    background-color: #660066;
+}
+.active{
+    color:#fff;
+    background-color: #990099;
+}
